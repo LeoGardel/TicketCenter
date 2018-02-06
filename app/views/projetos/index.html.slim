@@ -1,0 +1,25 @@
+h1 Listing projetos
+
+table
+  thead
+    tr
+      th Name
+      th Initial date
+      th Description
+      th
+      th
+      th
+
+  tbody
+    - @projetos.each do |projeto|
+      tr
+        td = projeto.name
+        td = projeto.initial_date
+        td = projeto.description
+        td = link_to 'Show', projeto
+        td = link_to 'Edit', edit_projeto_path(projeto)
+        td = link_to 'Destroy', projeto, data: { confirm: 'Are you sure?' }, method: :delete
+
+br
+
+= link_to 'New Projeto', new_projeto_path

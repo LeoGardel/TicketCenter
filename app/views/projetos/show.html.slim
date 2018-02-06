@@ -1,0 +1,15 @@
+p#notice = notice
+
+p
+  strong Name:
+  = @projeto.name
+p
+  strong Initial date:
+  = @projeto.initial_date
+p
+  strong Description:
+  = @projeto.description
+
+=> link_to 'Edit', edit_projeto_path(@projeto)
+'|
+=< link_to 'Back', projetos_path
