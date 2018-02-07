@@ -1,0 +1,28 @@
+h1 Listing bugs
+
+table
+  thead
+    tr
+      th Project
+      th Description
+      th Status
+      th User status
+      th Date status
+      th
+      th
+      th
+
+  tbody
+    - @bugs.each do |bug|
+      tr
+        td = bug.project.name
+        td = bug.description
+        td = bug.status
+        td = bug.user_status
+        td = bug.date_status
+        td = link_to 'Show', project_bug_path(id: bug.id)
+        td = link_to 'Edit', edit_project_bug_path(id: bug.id)
+
+br
+
+= link_to 'New Bug', new_project_bug_path

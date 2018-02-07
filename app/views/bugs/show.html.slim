@@ -1,0 +1,21 @@
+p#notice = notice
+
+p
+  strong Project:
+  = @bug.project.name
+p
+  strong Description:
+  = @bug.description
+p
+  strong Status:
+  = @bug.status
+p
+  strong User status:
+  = @bug.user_status
+p
+  strong Date status:
+  = @bug.date_status
+
+=> link_to 'Edit', edit_project_bug_path(id: @bug.id)
+'|
+=< link_to 'Back', project_bugs_path

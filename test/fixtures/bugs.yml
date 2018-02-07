@@ -1,11 +1,15 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  name: MyString
-  initial_date: 2018-02-05
+  project: one
   description: MyString
+  status: 1
+  user_status: 1
+  date_status: 2018-02-06
 
 two:
-  name: MyString
-  initial_date: 2018-02-05
+  project: two
   description: MyString
+  status: 1
+  user_status: 1
+  date_status: 2018-02-06
