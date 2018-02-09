@@ -7,9 +7,9 @@
           li = message
 
   .field
-    = f.label :description
-    = f.text_field :description
-  .field
     = f.label :status
     = f.select :status, Bug.statuses.keys.to_a
+  .field
+    = f.label :description
+    = f.text_area :description, size: "40x15"
   .actions = f.submit

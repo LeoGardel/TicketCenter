@@ -1,20 +1,20 @@
 h1 Bug ##{@bug.number}
 
 p
-  strong Project:
+  strong Project: 
   = @bug.project.name
 p
-  strong Description:
-  = @bug.description
-p
-  strong Status:
+  strong Status: 
   = @bug.status
 p
-  strong User status:
+  strong User status: 
   = @bug.user_status.name
 p
-  strong Date status:
+  strong Date status: 
   = @bug.date_status
+p
+  strong Description: 
+  = @bug.description
 
 => link_to 'Edit', edit_project_bug_path(@project, @bug)
 '|

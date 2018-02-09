@@ -1,14 +1,14 @@
 h1
   = @project.name
 p
-  strong Description:
-  = @project.description
-p
-  strong Start date:
+  strong Start date: 
   = @project.start_date
 p
-  strong Manager:
+  strong Manager: 
   = @project.manager.name
+p
+  strong Description: 
+  = @project.description
 
 => link_to 'Edit', edit_project_path(@project)
 '|

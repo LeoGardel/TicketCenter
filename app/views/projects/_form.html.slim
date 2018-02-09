@@ -10,12 +10,12 @@
     = f.label :name
     = f.text_field :name
   .field
-    = f.label :description
-    = f.text_field :description
-  .field
     = f.label :start_date
     = f.date_select :start_date
   .field
     = f.label :manager_id
     = f.select :manager_id, User.all.collect{|u| [u.name, u.id]}
+  .field
+    = f.label :description
+    = f.text_area :description, size: "40x15"
   .actions = f.submit
