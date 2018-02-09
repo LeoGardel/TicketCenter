@@ -1,4 +1,4 @@
-p#notice = notice
+h1 Bug ##{@bug.number}
 
 p
   strong Project:
@@ -11,11 +11,11 @@ p
   = @bug.status
 p
   strong User status:
-  = @bug.user_status
+  = @bug.user_status.name
 p
   strong Date status:
   = @bug.date_status
 
-=> link_to 'Edit', edit_project_bug_path(id: @bug.id)
+=> link_to 'Edit', edit_project_bug_path(@project, @bug)
 '|
-=< link_to 'Back', project_bugs_path
+=< link_to 'Back', project_path(@project)

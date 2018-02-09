@@ -17,5 +17,5 @@
     = f.date_select :start_date
   .field
     = f.label :manager_id
-    = f.number_field :manager_id
+    = f.select :manager_id, User.all.collect{|u| [u.name, u.id]}
   .actions = f.submit

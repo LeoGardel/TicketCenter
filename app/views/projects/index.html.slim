@@ -17,7 +17,7 @@ table
         td = project.name
         td = project.description
         td = project.start_date
-        td = project.manager_id
+        td = project.manager.name
         td = link_to 'Show', project
         td = link_to 'Edit', edit_project_path(project)
         td = link_to 'Destroy', project, data: { confirm: 'Are you sure?' }, method: :delete

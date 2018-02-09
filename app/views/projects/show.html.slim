@@ -1,7 +1,4 @@
-p#notice = notice
-
-p
-  strong Name:
+h1
   = @project.name
 p
   strong Description:
@@ -11,8 +8,13 @@ p
   = @project.start_date
 p
   strong Manager:
-  = @project.manager_id
+  = @project.manager.name
 
 => link_to 'Edit', edit_project_path(@project)
 '|
 =< link_to 'Back', projects_path
+
+br
+br
+
+== render partial: '/bugs/index', project_id: @project.id

@@ -10,16 +10,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180207032612) do
+ActiveRecord::Schema.define(version: 20180208031334) do
 
   create_table "bugs", force: :cascade do |t|
     t.integer  "project_id"
     t.string   "description"
     t.integer  "status"
-    t.integer  "user_status"
+    t.integer  "user_status_id"
     t.datetime "date_status"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
+    t.integer  "number"
     t.index ["project_id"], name: "index_bugs_on_project_id"
   end
 
@@ -53,7 +54,10 @@ ActiveRecord::Schema.define(version: 20180207032612) do
     t.string   "last_sign_in_ip"
     t.datetime "created_at",                          null: false
     t.datetime "updated_at",                          null: false
+    t.string   "name"
+    t.date     "date_of_birth"
     t.index ["email"], name: "index_users_on_email", unique: true
+    t.index ["name"], name: "index_users_on_name", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 

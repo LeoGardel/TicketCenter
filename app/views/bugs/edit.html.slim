@@ -1,22 +1,8 @@
-h1 Editing bug
+h1 Editing bug ##{@bug.number}
 
-= form_for @bug, url: project_bug_path do |f|
-  - if @bug.errors.any?
-    #error_explanation
-      h2 = "#{pluralize(@bug.errors.count, "error")} prohibited this bug from being saved:"
-      ul
-        - @bug.errors.full_messages.each do |message|
-          li = message
+== render 'form'
 
-  .field
-    = f.label :description
-    = f.text_field :description
-  .field
-    = f.label :status
-    = f.number_field :status
-  .actions = f.submit
-
-=> link_to 'Show', project_bug_path(@bug)
+=> link_to 'Show', project_bug_path(@project, @bug)
 '|
-=< link_to 'Back', project_bugs_path
+=< link_to 'Back', project_path(@project)
 
