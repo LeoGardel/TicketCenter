@@ -1,5 +1,6 @@
 require 'slack-notifier'
 
+
 class BugsController < ApplicationController
   before_action :set_project
   before_action :set_bug, only: [:show, :edit, :update]
@@ -14,8 +15,8 @@ class BugsController < ApplicationController
   # GET /projects/:project_id/bugs/1
   # GET /projects/:project_id/bugs/1.json
   def show
-    #notifier = Slack::Notifier.new "https://hooks.slack.com/services/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"
-    #notifier.ping "Hello World"
+    notifier = Slack::Notifier.new "https://hooks.slack.com/services/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", username: "TicketCenterApp"
+    notifier.ping "Hello World"
     #testpipefyworkspace.slack.com
   end
 
