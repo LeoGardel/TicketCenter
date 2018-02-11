@@ -15,9 +15,6 @@ class BugsController < ApplicationController
   # GET /projects/:project_id/bugs/1
   # GET /projects/:project_id/bugs/1.json
   def show
-    notifier = Slack::Notifier.new "https://hooks.slack.com/services/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", username: "TicketCenterApp"
-    notifier.ping "Hello World"
-    #testpipefyworkspace.slack.com
   end
 
   # GET /projects/:project_id/bugs/new
@@ -39,6 +36,7 @@ class BugsController < ApplicationController
 
     respond_to do |format|
       if @bug.save
+        send_slack_notification ( {create: true} )
         format.html { redirect_to [@project, @bug], notice: 'Bug was successfully created.' }
         format.json { render :show, status: :created, location: @bug }
       else
@@ -54,8 +52,8 @@ class BugsController < ApplicationController
     set_status_audit
 
     respond_to do |format|
-#      if @bug.update(bug_params.merge({project_id: params[:project_id]}))
       if @bug.update(bug_params)
+        send_slack_notification ( {update: true} )
         format.html { redirect_to [@project, @bug], notice: 'Bug was successfully updated.' }
         format.json { render :show, status: :ok, location: @bug }
       else
@@ -82,6 +80,25 @@ class BugsController < ApplicationController
     def set_number
       max_num = @project.bugs.maximum(:number)
       @bug.number = max_num.nil? ? 1 : max_num + 1
+    end
+
+    def send_slack_notification config_attr
+      # Creating object for notifying Slack members. WebHook for testpipefyworkspace.slack.com
+      notifier = Slack::Notifier.new "https://hooks.slack.com/services/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",
+       username: "TicketCenterApp",
+       channel: "#tcappreports"
+
+      if config_attr[:create]
+        message = "Bug *\##{@bug.number}* was created on project *#{@project.name}*. It is *#{@bug.status}* and was initialized with the following description:\n\n#{@bug.description} \n\nYou can access this bug clicking <#{project_bug_url(@project,@bug)}|here>."
+        notifier.ping message
+        #puts message
+      end
+
+      if config_attr[:update]
+        message = "Bug *\##{@bug.number}* was changed on project *#{@project.name}*. It is *#{@bug.status}* and its description was altered to:\n\n#{@bug.description} \n\nYou can access this bug clicking <#{project_bug_url(@project,@bug)}|here>."
+        notifier.ping message
+        #puts message
+      end
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
