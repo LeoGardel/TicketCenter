@@ -6,6 +6,7 @@ table
       th Name
       th Description
       th Start date
+      th End date
       th Manager
       th
       th
@@ -17,6 +18,7 @@ table
         td = project.name
         td = project.description.truncate(25)
         td = project.start_date
+        td = project.end_date
         td = project.manager.name
         td = link_to 'Show', project
         td = link_to 'Edit', edit_project_path(project)
