@@ -84,7 +84,7 @@ class BugsController < ApplicationController
 
     def send_slack_notification config_attr
       # Creating object for notifying Slack members. WebHook for testpipefyworkspace.slack.com
-      notifier = Slack::Notifier.new "https://hooks.slack.com/services/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",
+      notifier = Slack::Notifier.new ENV['SLACK_WEBHOOK_URL'],
        username: "TicketCenterApp",
        channel: "#tcappreports"
 
