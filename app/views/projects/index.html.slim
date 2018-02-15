@@ -1,6 +1,6 @@
 h1 Listing projects
 
-table
+table.table.table-sm.table-hover
   thead
     tr
       th Name
@@ -16,7 +16,7 @@ table
     - @projects.each do |project|
       tr
         td = project.name
-        td = project.description.truncate(25)
+        td = project.description.truncate(50)
         td = project.start_date
         td = project.end_date
         td = project.manager.name

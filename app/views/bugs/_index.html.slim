@@ -1,6 +1,6 @@
 h1 Listing bugs of #{@project.name}
 
-table
+table.table.table-sm.table-hover
   thead
     tr
       th Number
@@ -16,7 +16,7 @@ table
     - @bugs.each do |bug|
       tr
         td = bug.number
-        td = bug.description.truncate(25)
+        td = bug.description.truncate(50)
         td = bug.status
         td = bug.user_status.name
         td = bug.date_status

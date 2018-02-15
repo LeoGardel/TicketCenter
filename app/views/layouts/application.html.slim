@@ -1,0 +1,25 @@
+doctype html
+html
+  head
+    title TicketCenter
+    meta name="viewport" content="width=device-width, initial-scale=1.0"
+    = stylesheet_link_tag    "application", media: 'all', 'data-turbolinks-track' => true
+    = javascript_include_tag "application", 'data-turbolinks-track' => true
+    = javascript_include_tag "bootstrap.min", 'data-turbolinks-track' => true
+    = csrf_meta_tags
+
+  body
+    = render :partial => 'shared/navbar'
+
+    br
+
+    #pageContainer
+    
+      - if notice
+        p#notice.alert.alert-success role="alert"
+          = notice
+      - if alert
+        p#alert.alert.alert-info role="alert"
+          = alert
+
+      = yield

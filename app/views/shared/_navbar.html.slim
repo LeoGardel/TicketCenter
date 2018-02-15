@@ -1,0 +1,15 @@
+nav.navbar.navbar-expand-lg.navbar-light.bg-light.navbar-default
+  = link_to 'TicketCenter', projects_path, class: "navbar-brand mr-auto"
+  .authContainer.my-2.my-lg-0
+    - if user_signed_in?
+      'Logged in as 
+      strong
+        = current_user.email
+      br
+      = link_to 'Edit profile', edit_user_registration_path
+      =<> "|"
+      = link_to "Logout", destroy_user_session_path, method: :delete
+    - else
+      = link_to 'Sign up', new_user_registration_path
+      =<> "|"
+      = link_to 'Login', new_user_session_path
