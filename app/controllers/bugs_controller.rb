@@ -1,6 +1,5 @@
 require 'slack-notifier'
 
-
 class BugsController < ApplicationController
   before_action :set_project
   before_action :set_bug, only: [:show, :edit, :update]
@@ -29,11 +28,7 @@ class BugsController < ApplicationController
   # POST /projects/:project_id/bugs
   # POST /projects/:project_id/bugs.json
   def create
-    @bug = @project.bugs.new(bug_params)
-    
-    set_status_audit
-    set_number
-
+    @bug = @project.bugs.new(bug_params.merge!(user_status: current_user))
     respond_to do |format|
       if @bug.save
         send_slack_notification ( {create: true} )
@@ -49,10 +44,8 @@ class BugsController < ApplicationController
   # PATCH/PUT /projects/:project_id/bugs/1
   # PATCH/PUT /projects/:project_id/bugs/1.json
   def update
-    set_status_audit
-
     respond_to do |format|
-      if @bug.update(bug_params)
+      if @bug.update(bug_params.merge!(user_status: current_user))
         send_slack_notification ( {update: true} )
         format.html { redirect_to [@project, @bug], notice: 'Bug was successfully updated.' }
         format.json { render :show, status: :ok, location: @bug }
@@ -70,16 +63,6 @@ class BugsController < ApplicationController
 
     def set_bug
       @bug = @project.bugs.find(params[:id])
-    end
-
-    def set_status_audit
-      @bug.user_status_id = current_user.id
-      @bug.date_status = DateTime.now
-    end
-
-    def set_number
-      max_num = @project.bugs.maximum(:number)
-      @bug.number = max_num.nil? ? 1 : max_num + 1
     end
 
     def send_slack_notification config_attr
