@@ -1,16 +1,11 @@
 FactoryBot.define do
-  sequence(:email) { |n| "user_#{n}@factory.com" }
-  sequence(:name) { |n| "User Number #{n}" }
-  
-  factory :user do
+  factory :valid_user, class: User do
     
-    factory :valid_user do
-      name { generate(:name) }
-      email { generate(:email) }
-      password "123456"
-      password_confirmation "123456"
-    end
-
-    date_of_birth "1960-01-01"
+    name { Faker::Name.unique.name }
+    email { Faker::Internet.unique.email }
+    password { Faker::Lorem.characters(15) }
+    password_confirmation { password }
+    date_of_birth {Faker::Date.birthday(18, 65) }
+    
   end
 end

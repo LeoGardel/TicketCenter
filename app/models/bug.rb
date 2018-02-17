@@ -1,20 +1,27 @@
 class Bug < ApplicationRecord
-  before_validation :set_number, on: :create
-  before_validation :set_status_audit
+  before_create :set_number
+  before_save :set_date_status, if: :status_changed?
+  before_save :preserve_last_user_status, unless: :status_changed?
 
-  belongs_to :project
+  # user_status is used to hold the last user who wrote in the status field
   belongs_to :user_status, class_name: 'User'
+  belongs_to :project, dependent: :destroy
   enum status: [:active, :archived, :inactive]
 
-  validates_presence_of :project, :number, :description, :status, :user_status_id, :date_status
-  validates :number, uniqueness: { scope: :project }
-  validates :date_status, date: { before_or_equal_to: Proc.new { Time.now } }
+  validates_presence_of :project, :description, :status, :user_status
 
   private
-    def set_status_audit
+    # Method used to set the last moment which status was written
+    def set_date_status
       self.date_status = DateTime.now
     end
+    
+    # Method used to keep the last user that wrote in the status field as the user_status
+    def preserve_last_user_status
+      self.restore_user_status_id!
+    end
 
+    # Method used to initialize the Bug number, which is an incremental sequence without repetitions FOR EACH PROJECT
     def set_number
       max_num = self.project.bugs.maximum(:number)
       self.number = max_num.nil? ? 1 : max_num + 1

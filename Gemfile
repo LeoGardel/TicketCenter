@@ -48,8 +48,8 @@ gem 'slack-notifier'
 gem 'date_validator'
 
 group :test do
-  gem 'shoulda', '~> 3.5'
-  gem 'shoulda-matchers', '~> 2.0'
+  gem 'shoulda'
+  gem 'shoulda-matchers', '~> 3.1.2'
 end
 
 group :development, :test do
@@ -63,6 +63,7 @@ group :development, :test do
   gem 'rails-controller-testing'
   gem 'rack-test', require: 'rack/test'
   gem 'database_cleaner', '1.6.1'
+  gem 'faker', :git => 'https://github.com/stympy/faker.git', :branch => 'master'
 end
 group :development do
   # Access an IRB console on exception pages or by using <%= console %> anywhere in the code.
