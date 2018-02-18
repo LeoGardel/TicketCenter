@@ -49,7 +49,7 @@ gem 'date_validator'
 
 group :test do
   gem 'shoulda'
-  gem 'shoulda-matchers', '~> 3.1.2'
+  gem 'shoulda-matchers', github: 'thoughtbot/shoulda-matchers'
 end
 
 group :development, :test do

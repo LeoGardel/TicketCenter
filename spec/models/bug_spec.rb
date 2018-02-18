@@ -23,7 +23,7 @@ RSpec.describe Bug, type: :model do
   it { should belong_to(:project).dependent(:destroy) }
 
   #value validations
-  it { should define_enum_for(:status).with([:active, :archived, :inactive])}
+  it { should define_enum_for(:status).with_values([:active, :archived, :inactive])}
   it "should be accepted with valid attributes" do
     valid_bug = FactoryBot.build(:valid_bug)
     expect(valid_bug).to be_valid

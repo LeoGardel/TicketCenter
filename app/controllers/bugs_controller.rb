@@ -74,13 +74,11 @@ class BugsController < ApplicationController
       if config_attr[:create]
         message = "Bug *\##{@bug.number}* was created on project *#{@project.name}*. It is *#{@bug.status}* and was initialized with the following description:\n\n#{@bug.description} \n\nYou can access this bug clicking <#{project_bug_url(@project,@bug)}|here>."
         notifier.ping message
-        #puts message
       end
 
       if config_attr[:update]
         message = "Bug *\##{@bug.number}* was changed on project *#{@project.name}*. It is *#{@bug.status}* and its description was altered to:\n\n#{@bug.description} \n\nYou can access this bug clicking <#{project_bug_url(@project,@bug)}|here>."
         notifier.ping message
-        #puts message
       end
     end
 
