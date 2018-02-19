@@ -4,7 +4,7 @@ RSpec.describe ProjectsController, type: :controller do
   let(:persisted_user) { FactoryBot.create(:valid_user) }
   let!(:persisted_project) { FactoryBot.create(:another_valid_project) }
   let(:valid_attributes) { FactoryBot.attributes_for(:valid_project, manager_id: persisted_user.id) }
-  let(:invalid_attributes) { FactoryBot.attributes_for(:project_with_invalid_dates, manager: persisted_user.id) }
+  let(:invalid_attributes) { FactoryBot.attributes_for(:project_with_invalid_dates, manager_id: persisted_user.id) }
 
   context "when unauthenticated" do
     before(:each) { sign_in nil }
