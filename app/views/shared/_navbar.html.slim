@@ -1,6 +1,6 @@
 nav.navbar.navbar-expand-lg.navbar-light.bg-light.navbar-default
   = link_to 'TicketCenter', projects_path, class: "navbar-brand mr-auto"
-  .authContainer.my-2.my-lg-0
+  .authContainer class=(user_signed_in? ? 'authContainerSignedId' : 'authContainerNotSignedId')
     - if user_signed_in?
       'Logged in as 
       strong
